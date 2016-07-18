@@ -1,0 +1,7 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+en:
+  spree:
+    stock_reports:
+      stock: Stock
+      stock_description: A report with an overview of stock amounts for all variants
