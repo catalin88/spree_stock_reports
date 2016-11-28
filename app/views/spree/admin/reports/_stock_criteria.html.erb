@@ -1,13 +1,15 @@
 <%= search_form_for @search, url: spree.stock_admin_reports_path do |s| %>
-  <div class="field align-center">
+  <div class="form-group">
     <%= label_tag nil, Spree.t(:count_on_hand), class: 'inline' %>
-    <%= s.text_field :count_on_hand_gteq %>
-
-    <span class="range-divider">
-      <i class="icon-arrow-right"></i>
-    </span>
-
-    <%= s.text_field :count_on_hand_lteq %>
+    
+    <div class="row">
+      <div class="col-md-6">
+        <%= s.text_field :count_on_hand_gteq, class: 'form-control' %>
+      </div>
+      <div class="col-md-6">
+        <%= s.text_field :count_on_hand_lteq, class: 'form-control' %>
+      </div>
+    </div>
   </div>
 
   <div class="actions filter-actions">
