@@ -3,27 +3,33 @@
   <%= Spree.t(:stock, scope: :stock_reports) %>
 <% end %>
 
-<div class="well">
-  <%= render partial: 'spree/admin/reports/stock_criteria' %>
-</div>
-
 <table class="table table-bordered admin-report" data-hook="stock">
   <thead>
     <tr>
       <th><%= Spree.t(:sku) %></th>
       <th><%= Spree.t(:name) %></th>
       <th><%= Spree.t(:stock_location) %></th>
-      <th><%= Spree.t(:count_on_hand) %></th>
+      <th><%= Spree.t(:quantity) %></th>
+      <th><%= Spree.t(:cost_price) %></th>
+      <th><%= Spree.t(:value) %></th>
     </tr>
   </thead>
   <tbody>
+    <% @stock_value = 0 %>
     <% @stock_items.each do |stock_item| %>
       <tr>
         <td><%= stock_item.variant.sku %></td>
-        <td><%= link_to stock_item.variant.try(:name), edit_admin_product_path(stock_item.variant) %></td>
+        <td><%= stock_item.variant.try(:name) %></td>
         <td><%= stock_item.stock_location.name %></td>
         <td><%= stock_item.count_on_hand %></td>
+        <td><%= "%.2f" % (stock_item.variant.cost_price) %></td>
+        <td><%= "%.2f" % (stock_item.count_on_hand * stock_item.variant.cost_price) %></td>
       </tr>
+      <% @stock_value += stock_item.count_on_hand * stock_item.variant.cost_price %>
     <% end %>
+    <tr>
+      <td colspan="5"></td>
+      <td><%= @stock_value %></td>
+    </tr>
   </tbody>
 </table>
